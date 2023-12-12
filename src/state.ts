@@ -36,9 +36,9 @@ const state = {
     // console.log(currentState);
     chatroomsRef.on("value", (snapshot) => {
       const messagesFromServer = snapshot.val();
-      // const messagesList = map(messagesFromServer.messages);
-      // cs.messages = messagesList;
-      // this.setState(cs);
+      const messagesList = map(messagesFromServer.messages);
+      cs.messages = messagesList;
+      this.setState(cs);
     });
   },
 
@@ -124,7 +124,7 @@ const state = {
       console.error("No hay userId");
     }
   },
-  accesToRoom(callback) {
+  accesToRoom(callback?) {
     const cs = this.getState();
     const roomId = cs.roomId;
     fetch(API_BASE_URL + "/rooms/" + roomId + "userId=" + cs.userId)
@@ -134,7 +134,10 @@ const state = {
       .then((data) => {
         cs.rtdbRoomId = data.rtdbRoomId;
         this.setState(cs);
-        callback();
+        this.listenRoom();
+        if (callback) {
+          callback();
+        }
       });
   },
 

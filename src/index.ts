@@ -7,7 +7,9 @@ import { state } from "./state";
     if (err) {
       console.error("Hubo un error en el signIn");
     }
-    state.askNewRoom();
+    state.askNewRoom(() => {
+      state.accesToRoom();
+    });
   });
 
   // Al comenzar
