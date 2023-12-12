@@ -127,7 +127,7 @@ const state = {
   accesToRoom(callback?) {
     const cs = this.getState();
     const roomId = cs.roomId;
-    fetch(API_BASE_URL + "/rooms/" + roomId + "userId=" + cs.userId)
+    fetch(API_BASE_URL + "/rooms/" + roomId + "?userId=" + cs.userId)
       .then((res) => {
         return res.json();
       })
